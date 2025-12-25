@@ -1,9 +1,9 @@
+import { type IUser } from "@/user/user.dto";
 import { type NextFunction, type Request, type Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import createHttpError from "http-errors";
 import jwt from "jsonwebtoken";
 import process from "process";
-import { type IUser } from "../../user/user.dto";
 
 export const roleAuth = (roles: IUser["role"][], publicRoutes: string[] = []) =>
   expressAsyncHandler(

@@ -1,3 +1,5 @@
+import { type IUser } from "@/user/user.dto";
+import * as userService from "@/user/user.service";
 import bcrypt from "bcrypt";
 import dayjs from "dayjs";
 import { type Request } from "express";
@@ -6,8 +8,6 @@ import jwt from "jsonwebtoken";
 import passport from "passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
-import { type IUser } from "../../user/user.dto";
-import * as userService from "../../user/user.service";
 
 export const isValidPassword = async function (
   value: string,
@@ -85,10 +85,10 @@ export const initPassport = (): void => {
 export const createUserTokens = (user: Omit<IUser, "password">) => {
   const jwtSecret = process.env.JWT_SECRET ?? "";
   const accessToken = jwt.sign(user, jwtSecret, {
-    expiresIn: process.env.ACCESS_TOKEN_EXPIRY ?? "30m",
+    expiresIn: process.env.ACCESS_TOKEN_EXPIRY ?? ("30m" as any),
   });
   const refreshToken = jwt.sign(user, jwtSecret, {
-    expiresIn: process.env.REFRESH_TOKEN_EXPIRY ?? "2d",
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY ?? ("2d" as any),
   });
   return { accessToken, refreshToken };
 };

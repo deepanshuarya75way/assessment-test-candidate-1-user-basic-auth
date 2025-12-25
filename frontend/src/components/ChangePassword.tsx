@@ -9,16 +9,20 @@ import { useAppDispatch } from "../store/store";
 import PasswordInput from "./PasswordInput";
 
 const validation = yup.object({
-  currentPassword: yup.string().nullable(),
+  currentPassword: yup.string().when("$provider", {
+    is: (provider: string) => provider === "manual",
+    then: (schema) => schema.required("Current password is required"),
+    otherwise: (schema) => schema.optional(),
+  }),
   password: yup
     .string()
     .required("Password is required")
-    .min(5, "Minimumn 5 chars are required")
-    .max(16, "Miximumn 16 chars allowed"),
+    .min(5, "Minimum 5 chars are required")
+    .max(16, "Maximum 16 chars allowed"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Comfirm password is required"),
+    .required("Confirm password is required"),
 });
 
 const useStyle = (theme: Theme) =>
@@ -62,7 +66,8 @@ export default function ChangePassword(props: Props) {
       password: "",
       currentPassword: "",
     },
-    resolver: yupResolver(validation),
+    context: { provider },
+    resolver: yupResolver<FormData, unknown, unknown>(validation),
   });
 
   const onSubmit = async (data: FormData) => {

@@ -1,5 +1,5 @@
+import ResetPassword from "@/components/ResetPassword";
 import { Box } from "@mui/material";
-import ResetPassword from "../components/ResetPassword";
 
 function Index() {
   const params = new URLSearchParams(window.location.search);

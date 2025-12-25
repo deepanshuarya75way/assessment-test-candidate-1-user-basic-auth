@@ -1,6 +1,5 @@
 {
-  "ignore": [".git", "node_modules", "dist"],
-  "watch": ["./index.ts", "./app"],
-  "exec": "pnpm start",
-  "ext": "ts"
+  "watch": ["app/**/*.ts", "index.ts"],
+  "ext": "ts",
+  "exec": "pnpm start"
 }

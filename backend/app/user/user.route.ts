@@ -1,7 +1,7 @@
+import { catchError } from "@middlewares/cath-error.middleware";
+import { roleAuth } from "@middlewares/role-auth.middleware";
 import { Router } from "express";
 import passport from "passport";
-import { catchError } from "../common/middleware/cath-error.middleware";
-import { roleAuth } from "../common/middleware/role-auth.middleware";
 import * as userController from "./user.controller";
 import * as userValidator from "./user.validation";
 

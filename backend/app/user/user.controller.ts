@@ -1,16 +1,16 @@
-import axios from "axios";
-import { type Request, type Response } from "express";
-import asyncHandler from "express-async-handler";
-import createHttpError from "http-errors";
-import verifyAppleToken from "verify-apple-id-token";
-import { createResponse } from "../common/helper/response.hepler";
-import { sendEmail } from "../common/services/email.service";
+import { createResponse } from "@helpers/response.helper";
+import { sendEmail } from "@services/email.service";
 import {
   createUserTokens,
   decodeToken,
   isValidPassword,
   verifyToken,
-} from "../common/services/passport-jwt.service";
+} from "@services/passport-jwt.service";
+import axios from "axios";
+import { type Request, type Response } from "express";
+import asyncHandler from "express-async-handler";
+import createHttpError from "http-errors";
+import verifyAppleToken from "verify-apple-id-token";
 import { ProviderType } from "./user.dto";
 import { hashPassword } from "./user.schema";
 import * as userService from "./user.service";

@@ -4,14 +4,15 @@ import express, { type Express, type Request, type Response } from "express";
 import http from "http";
 import morgan from "morgan";
 
-import { loadConfig } from "./app/common/helper/config.hepler";
+import { loadConfig } from "@/common/helper/config.helper";
 loadConfig();
 
-import errorHandler from "./app/common/middleware/error-handler.middleware";
-import { initDB } from "./app/common/services/database.service";
-import { initPassport } from "./app/common/services/passport-jwt.service";
-import routes from "./app/routes";
-import { type IUser } from "./app/user/user.dto";
+import routes from "@/routes";
+import { type IUser } from "@/user/user.dto";
+import errorHandler from "@middlewares/error-handler.middleware";
+import { globalLimiter } from "@middlewares/rate-limit.middleware";
+import { initDB } from "@services/database.service";
+import { initPassport } from "@services/passport-jwt.service";
 
 declare global {
   namespace Express {
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(globalLimiter);
 
 const initApp = async (): Promise<void> => {
   // init mongodb

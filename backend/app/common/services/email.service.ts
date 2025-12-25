@@ -1,7 +1,7 @@
+import { loadConfig } from "@helpers/config.helper";
 import nodemailer from "nodemailer";
 import type Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { loadConfig } from "../helper/config.hepler";
 
 loadConfig();
 
