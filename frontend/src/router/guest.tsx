@@ -12,6 +12,11 @@ const guestRouter: RouteObject = {
   element: <GuestLayout />,
   loader: guestLoader,
   errorElement: <ErrorPage />,
+
+
+
+
+  tset,
   children: [
     {
       path: "/login",
